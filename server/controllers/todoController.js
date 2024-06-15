@@ -21,6 +21,27 @@ const getAllTodos = async (req, res) => {
         res.status(500).send('Server Error');
     }
 };
+
+const updateTodo = async (req, res) => {
+    try {
+        const todoId = req.params.todoId;
+        const { todo } = req.body;
+        
+        // Güncellenecek todo'nun ID'si ve güncellenecek veri
+        const updatedTodo = await Todo.findByIdAndUpdate(todoId, { todo }, { new: true });
+
+        if (!updatedTodo) {
+            return res.status(404).json({ message: 'Todo not found' });
+        }
+
+        res.json({ message: 'Todo updated successfully', updatedTodo });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+};
+
+
 const deleteTodo = async(req, res)=>{
 
     try{
@@ -31,6 +52,6 @@ const deleteTodo = async(req, res)=>{
         console.error(error.message);
         res.status(500).send("Server Error");
     }
-}
+};
 
-module.exports = { createTodo, getAllTodos, deleteTodo };
+module.exports = { createTodo, getAllTodos, deleteTodo, updateTodo };
