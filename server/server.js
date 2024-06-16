@@ -6,7 +6,7 @@ const todoRoute = require('./routes/todoRoute')
 
 const app = express();
 app.use(cors());
-app.use(express.json());  // Parantez eksikti, bu şekilde düzeltilmeli
+app.use(express.json());
 
 mongoose.connect(process.env.DB_URL)
     .then(() => {

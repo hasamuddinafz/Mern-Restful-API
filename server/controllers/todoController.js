@@ -26,8 +26,6 @@ const updateTodo = async (req, res) => {
     try {
         const todoId = req.params.todoId;
         const { todo } = req.body;
-        
-        // Güncellenecek todo'nun ID'si ve güncellenecek veri
         const updatedTodo = await Todo.findByIdAndUpdate(todoId, { todo }, { new: true });
 
         if (!updatedTodo) {
